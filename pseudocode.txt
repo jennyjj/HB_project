@@ -1,0 +1,4 @@
+Ask user which food they like after giving them choices of spaghetti, bratwurst, lomein, and falafel.
+Depending on his/her choice,
+	take them to Italy, Germany, China or Israel
+	give them a greeting in Italian, German, Chinese or Hebrew
