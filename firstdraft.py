@@ -3,7 +3,7 @@ def greet_user():
     print "We look forward to seeing where you will go!"
 
 def ask_for_info():
-    question = /n"""
+    question = """
     Which of the following food choices do you prefer?
          A. Spaghetti
          B. Bratwurst
@@ -28,22 +28,21 @@ def ask_if_continue_to_region():
     next_question = (raw_input("Do you want to go to a specific region? ")).lower()
 
     if next_question == "yes":
-        specify_region()
+        country = (raw_input("Which country are you going to?")).capitalize()
+        specify_region(country)
     elif next_question == "no":
         print "Goodbye!"
     else:
         print "Please give a yes or no answer."
 
-def specify_region():
-    remind_of_country = (raw_input("Which country are you going to? ")).capitalize()
-
-    if remind_of_country == "Italy":
+def specify_region(country):
+    if country == "Italy":
         within_Italy()
-    elif remind_of_country == "Germany":
+    elif country == "Germany":
         within_Germany()
-    elif remind_of_country == "China":
+    elif country == "China":
         within_China()
-    elif remind_of_country == "Israel":
+    elif country == "Israel":
         within_Israel()
     else:
         print "Please choose a country that is on our list. "
@@ -51,8 +50,7 @@ def specify_region():
 def ask_if_repeat_whole_process():
 # --------------------------------------------------------------
 
-greet_user
-
+greet_user()
 playing = True
 while playing:
     ask_for_info() = food_preference
