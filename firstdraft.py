@@ -113,19 +113,21 @@ def creates_prints_destination(food_preference):
 def ask_if_repeat_whole_process():
     answer = (raw_input("Do you want to play again? ")).lower()
     if answer == "yes":
-        True 
         return True
     elif answer == "no":
-        False
         return False
     else:
-        print "Give a yes or no answer."
-
+        return 2
         
 
 greet_user()
 playing = True
 while playing:
+    if playing == 2:
+        print "Please enter 'yes' or 'no'"
+        playing = ask_if_repeat_whole_process()
+        continue
     food_preference = ask_for_info()
     creates_prints_destination(food_preference)
     playing = ask_if_repeat_whole_process()
+print "Thanks for playing my game"
