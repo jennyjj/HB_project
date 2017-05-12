@@ -1,5 +1,5 @@
 def greet_user():
-    print "Welcome to Follow Your Tastes."
+    print "Welcome to Where Will Your Tastes Lead You?"
     print "We look forward to seeing where you will go!"
 
 def create_foods(my_trip, food):
@@ -167,12 +167,8 @@ def specify_region(country):
 
         within_Brazil(preference)
 
-    else:
-        print "Please choose a country that is on our list. "
-
 def create_country_locations(my_trip, key, country):
     my_trip[key].append(country)
-    print my_trip
 
 def ask_if_continue_to_region(country):
     next_question = (raw_input("Do you want to go to a specific region? ")).lower()
@@ -188,45 +184,39 @@ def creates_prints_destination(food_preference):
 
     if food_preference == "A":
         print "Let's go to Italy!"
-        create_country_locations(my_trip, "countries", "Italy")
         country = "Italy"
     elif food_preference == "B":
         print "Let's go to Germany!"
-        create_country_locations(my_trip, "countries", "Germany")
         country = "Germany"
     elif food_preference == "C":
         print "Let's go to China!"
-        create_country_locations(my_trip, "countries", "China")
         country = "China"
     elif food_preference == "D":
         print "Let's go to Brazil!"
-        create_country_locations(my_trip, "countries", "Brazil")
         country = "Brazil"
-    else:
-        print "Please choose from among the food choices."
-        ask_for_info()
 
+    create_country_locations(my_trip, "countries", country)
     ask_if_continue_to_region(country)
 
 def create_a_map(my_trip):
     if my_trip["regions"] == []:
-        print "In your travels, you visited {}.".format(my_trip["countries"])
+        print "You have traveled to the country/ies of {}.".format(my_trip["countries"])
     else:
-        print "In your travels, you visited the regions of {} in {}.".format(my_trip["regions"], my_trip["countries"])
-    
+        print "You have traveled to the region(s) of {} in the country/ies of {}.".format(my_trip["regions"], my_trip["countries"])
+
 def create_menu(my_trip):
-    print "In your travels, you enjoyed tasting {}.".format(my_trip["foods"])
+    print "You have enjoyed tasing {}.".format(my_trip["foods"])
 
 def ask_if_repeat_whole_process():
     answer = (raw_input("Do you want to play again? ")).lower()
     if answer == "yes":
         return True
-    elif answer == "no":
+    if answer == "no":
         return False
     else:
-        return 2
-        
-greet_user()
+        playing = 2
+
+
 my_trip = {"countries": [], "regions": [], "foods": []}
 playing = True
 while playing:
