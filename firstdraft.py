@@ -1,3 +1,5 @@
+import re 
+
 def greet_user():
     print "Welcome to Where Will Your Tastes Lead You?"
     print "We look forward to seeing where you will go!"
@@ -198,14 +200,23 @@ def creates_prints_destination(food_preference):
     create_country_locations(my_trip, "countries", country)
     ask_if_continue_to_region(country)
 
-def create_a_map(my_trip):
-    if my_trip["regions"] == []:
-        print "You have traveled to the country/ies of {}.".format(my_trip["countries"])
-    else:
-        print "You have traveled to the region(s) of {} in the country/ies of {}.".format(my_trip["regions"], my_trip["countries"])
+def _format_list_to_string(list_to_convert_to_string):
+    list_to_convert_to_string.insert(-1, ' and')
+    new_string = ','.join(list_to_convert_to_string)
+    print new_string
+    return new_string
 
-def create_menu(my_trip):
-    print "You have enjoyed tasing {}.".format(my_trip["foods"])
+def create_a_map(my_trip):
+    formatted_string_countries = _format_list_to_string(my_trip["countries"])
+    if my_trip["regions"] == []:   
+        print "You have traveled to the country/ies of {}.".format(formatted_string_countries)
+    else:
+        formatted_string_regions = _format_list_to_string(my_trip["regions"])
+        print "You have traveled to the region(s) of {} in the country/ies of {}.".format(formatted_string_regions, formatted_string_countries) 
+
+def create_menu(my_trip):   
+    formatted_string_foods = _format_list_to_string(my_trip["foods"])
+    print "You have enjoyed tasting {}.".format(formatted_string_foods)
 
 def ask_if_repeat_whole_process():
     answer = (raw_input("Do you want to play again? ")).lower()
@@ -214,7 +225,7 @@ def ask_if_repeat_whole_process():
     if answer == "no":
         return False
     else:
-        playing = 2
+        return 2
 
 
 my_trip = {"countries": [], "regions": [], "foods": []}
