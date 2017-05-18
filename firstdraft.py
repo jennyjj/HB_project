@@ -1,5 +1,3 @@
-import re 
-
 def greet_user():
     print "Welcome to Where Will Your Tastes Lead You?"
     print "We look forward to seeing where you will go!"
@@ -25,8 +23,8 @@ def ask_for_info():
 
     return food_preference
     
-def create_region_locations(my_list, key, region):
-    my_trip[key].append(region)
+def create_locations(my_dict, key, location):
+    my_trip[key].append(location)
 
 def within_Italy(preference):
     if preference == "A":
@@ -40,12 +38,12 @@ def within_Italy(preference):
         region = "Lazio"
     elif preference == "D":
         print "You are on your way to Campania!"
-        regino = "Campania"
+        region = "Campania"
     else:
         print "Choose from the choices on the menu."
         specify_region("Italy")
 
-    create_region_locations(my_trip, "regions", region)
+    create_locations(my_trip, "regions", region)
 
 def within_Germany(preference):
     if preference == "A":
@@ -64,7 +62,7 @@ def within_Germany(preference):
         print "Choose from the choices on the menu."
         specify_region("Germany")
 
-    create_region_locations(my_trip, "regions", region)
+    create_locations(my_trip, "regions", region)
 
 def within_China(preference):
     if preference == "A":
@@ -83,7 +81,7 @@ def within_China(preference):
         print "Choose from the choices on the menu."
         specify_region("China")
 
-    create_region_locations(my_trip, "regions", region)
+    create_locations(my_trip, "regions", region)
 
 def within_Brazil(preference):
     if preference == "A":
@@ -102,7 +100,7 @@ def within_Brazil(preference):
         print "Choose from the choices on the menu."
         specify_region("Brazil")
 
-    create_region_locations(my_trip, "regions", region)
+    create_locations(my_trip, "regions", region)
 
 def specify_region(country):
     if country == "Italy":
@@ -197,26 +195,51 @@ def creates_prints_destination(food_preference):
         print "Let's go to Brazil!"
         country = "Brazil"
 
-    create_country_locations(my_trip, "countries", country)
+    create_locations(my_trip, "countries", country)
     ask_if_continue_to_region(country)
 
+def remove_and_after_one_round(the_list_to_correct):
+    for i in the_list_to_correct:
+        if i == "and":
+            the_list_to_correct.remove("and")
+    return the_list_to_correct
+
+def remove_and_from_all_lists(lst1, lst2, lst3):
+    remove_and_after_one_round(lst1)
+    remove_and_after_one_round(lst2)
+    remove_and_after_one_round(lst3)
+
 def _format_list_to_string(list_to_convert_to_string):
-    list_to_convert_to_string.insert(-1, ' and')
-    new_string = ','.join(list_to_convert_to_string)
-    print new_string
+    list_to_convert_to_string.insert(-1, 'and')
+    new_string = ', '.join(list_to_convert_to_string)
+    return new_string
+
+def _format_list_to_string_for_one_item(list_to_convert_to_string):
+    new_string = "".join(list_to_convert_to_string)
     return new_string
 
 def create_a_map(my_trip):
     formatted_string_countries = _format_list_to_string(my_trip["countries"])
     if my_trip["regions"] == []:   
         print "You have traveled to the country/ies of {}.".format(formatted_string_countries)
+    elif my_trip["regions"] == [] and len(my_trip["countries"]) == 1:
+        formatted_string_one_country = _format_list_to_string_for_one_item(my_trip["countries"])
+        print "You have traveled to the country of {}.".format(formatted_string_one_country)
+    elif len(my_trip["regions"]) == 1 and len(my_trip["countries"]) == 1:
+        formatted_string_one_region = _format_list_to_string_for_one_item(my_trip["regions"])
+        formatted_string_one_country = _format_list_to_string_for_one_item(my_trip["countries"])
+        print "You have traveled to the region of {} in the country of {}.".format(formatted_string_one_region, formatted_string_one_country)
     else:
         formatted_string_regions = _format_list_to_string(my_trip["regions"])
         print "You have traveled to the region(s) of {} in the country/ies of {}.".format(formatted_string_regions, formatted_string_countries) 
 
 def create_menu(my_trip):   
-    formatted_string_foods = _format_list_to_string(my_trip["foods"])
-    print "You have enjoyed tasting {}.".format(formatted_string_foods)
+    if len(my_trip["foods"]) == 1:
+        formatted_string_for_one_food = _format_list_to_string_for_one_item(my_trip["foods"])
+        print "You have enjoyed tasting {}.".format(formatted_string_for_one_food)
+    else:
+        formatted_string_foods = _format_list_to_string(my_trip["foods"])
+        print "You have enjoyed tasting {}.".format(formatted_string_foods)
 
 def ask_if_repeat_whole_process():
     answer = (raw_input("Do you want to play again? ")).lower()
@@ -235,6 +258,7 @@ while playing:
         print "Please enter 'yes' or 'no'"
         playing = ask_if_repeat_whole_process()
         continue
+    remove_and_from_all_lists(my_trip["countries"], my_trip["regions"], my_trip["foods"])
     food_preference = ask_for_info()
     creates_prints_destination(food_preference)
     create_a_map(my_trip)
