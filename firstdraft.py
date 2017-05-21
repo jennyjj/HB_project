@@ -258,7 +258,7 @@ def create_menu(my_trip):
     if len(my_trip["foods"]) == 1:
         formatted_string_for_one_food = _format_list_to_string_for_one_item(my_trip["foods"])
         print "You have enjoyed tasting {}.".format(formatted_string_for_one_food) 
-    elif len(my_trip["foods"]) == 2:B
+    elif len(my_trip["foods"]) == 2:
         formatted_string_for_two_foods = _format_list_to_string_for_two_items(my_trip["foods"])
         print "You have enjoyed tasting {}.".format(formatted_string_for_two_foods)
     else:
