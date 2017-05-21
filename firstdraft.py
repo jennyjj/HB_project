@@ -94,7 +94,7 @@ def within_Brazil(preference):
         region = "Northeast Brazil"
     elif preference == "C":
         print "You are on your way to Central-West Brazil!"
-        region = "Central-West within_Brazil"
+        region = "Central-West Brazil"
     elif preference == "D":
         print "You are on your way to Southeast Brazil!"
         region = "Southeast Brazil"
@@ -258,7 +258,7 @@ def create_menu(my_trip):
     if len(my_trip["foods"]) == 1:
         formatted_string_for_one_food = _format_list_to_string_for_one_item(my_trip["foods"])
         print "You have enjoyed tasting {}.".format(formatted_string_for_one_food) 
-    elif len(my_trip["foods"]) == 2:
+    elif len(my_trip["foods"]) == 2:B
         formatted_string_for_two_foods = _format_list_to_string_for_two_items(my_trip["foods"])
         print "You have enjoyed tasting {}.".format(formatted_string_for_two_foods)
     else:
